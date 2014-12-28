@@ -66,7 +66,7 @@ def init_static_path(static_path):
         """Creates the whole directory tree (recursively), if it's missing."""
         try:
             os.makedirs(path)
-        except OSError, exc:
+        except OSError as exc:
             if exc.errno != errno.EEXIST:
                 raise
 
@@ -78,7 +78,7 @@ def init_static_path(static_path):
         version = open(version_file).read()
     else:
         version = None
-        files_count = len(os.walk(static_path).next()[2])
+        files_count = len(next(os.walk(static_path))[2])
         if files_count != 0:
             # non-empty path with a missing version file
             # this looks like a user directory - we'd better not touch anything!
